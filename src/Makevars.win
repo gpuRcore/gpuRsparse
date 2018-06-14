@@ -1,0 +1,10 @@
+CXX_STD=CXX11
+PKG_CPPFLAGS=-I../inst/include -DCL_HPP_MINIMUM_OPENCL_VERSION=110 -DCL_USE_DEPRECATED_OPENCL_1_2_APIS -DCL_HPP_TARGET_OPENCL_VERSION=120
+
+GPUR_PATH = `${R_HOME}/bin${R_ARCH_BIN}/Rscript -e "gpuR:::CxxFlags()"`
+
+ifeq "$(WIN)" "64"
+	PKG_LIBS=-L$(GPUR_PATH)"/loader/x64" -lOpenCL
+else
+	PKG_LIBS=-L$(GPUR_PATH)"/loader/i386" -lOpenCL
+endif
